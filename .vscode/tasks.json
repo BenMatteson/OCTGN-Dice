@@ -1,0 +1,17 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "o8build",
+            "type": "shell",
+            "command": "C:/Users/ben/AppData/Local/Programs/OCTGN/o8build.exe -d E:/System/Ben/Documents/GitHub/OCTGN-Dice/Dice",
+            "options": {
+                "cwd": "E:/System/Ben/Documents/OCTGN/LocalFeed"
+            },
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}

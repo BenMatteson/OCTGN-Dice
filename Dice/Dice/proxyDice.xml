@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+	<blocks>
+		<block type="text"  id="value" >
+			<location x="27"  y="23" />
+			<text color="#FFFFFF" size="50" />
+		</block>
+	</blocks>
+	<template src="Dice/opal.png" default="True">
+		<matches>
+			<match name="dieType" value="d6" />
+		</matches>
+		<textblocks>
+			<link block="value">
+				<property name="face" />
+			</link>
+		</textblocks>
+	</template>
+</templates>

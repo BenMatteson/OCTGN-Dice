@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set name="Dice" version="0.1.0.0" gameVersion="0.1.0.0"
+    id="46e153e5-9327-4799-a52c-bc83388f06db" gameId="77645381-501e-48f9-bb9b-0b8459dd9713">
+    <cards>
+        <card id="3d2f57e3-50d2-4050-866e-593b2013f910" name="d6">
+            <property name="dieType" value="d6"/>
+            <property name="face" value="1" />
+            
+            <alternate type="2" name="d6-2">
+                <property name="face" value="2" />
+            </alternate>
+            <alternate type="3" name="d6-3">
+                <property name="face" value="3" />
+            </alternate>
+            <alternate type="4" name="d6-4">
+                <property name="face" value="4" />
+            </alternate>
+            <alternate type="5" name="d6-5">
+                <property name="face" value="5" />
+            </alternate>
+            <alternate type="6" name="d6-6">
+                <property name="face" value="6" />
+            </alternate>
+        </card>
+    </cards>
+</set>

@@ -1,3 +1,7 @@
+#OCTGN Library
+3.1.0.2.py
+*.nupkg
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

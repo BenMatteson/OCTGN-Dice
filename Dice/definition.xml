@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<game name="Dice" authors="Soul1355" id="77645381-501e-48f9-bb9b-0b8459dd9713" 
+    octgnVersion="3.4.286.0" version="0.3.0.0" scriptVersion="3.1.0.2" 
+    markersize="12" usetwosidedtable="False"
+    setsurl="https://github.com/BenMatteson/OCTGN-Dice" 
+    gameurl="https://github.com/BenMatteson/OCTGN-Dice"
+    description="A set of dice for playing associated games, designed for easy import into other games"
+    tags="Dice" iconurl="https://publicdomainvectors.org/photos/misc-dice.png">
+    <scripts>
+        <script src="Dice/dice.py" />
+        <script src="octgn-lib/lib.py"/>
+    </scripts>
+    <proxygen definitionsrc="Dice/proxyDice.xml" />
+    <globalvariables>
+        <!-- diceRegion is comma seperated x,y coordinates of top-left corner followed by width and height-->
+        <globalvariable name="diceRegion" value="-10,-10,40,40" />
+        <globalvariable name="diceBuffer" value="40" />
+    </globalvariables>
+    <card front="Dice/hidden.png" height="30" width="30" cornerRadius="1" 
+        back="Dice/hidden.png" backHeight="30" backWidth="30" backCornerRadius="1">
+        <property name="dieType" type="String" ignoreText="False" textKind="Free" hidden="False" /> 
+        <property name="face" type="String" ignoreText="False" textKind="Free" hidden="False" />
+    </card>
+    <table name="Table" visibility="undefined" width="640" height="480" 
+        background="Dice/table.jpg" backgroundStyle="uniformToFill">
+        <cardaction menu="Roll" shortcut="CTRL+S" default="True" batchExecute="roll" showIf="isDice" />
+        <groupaction menu="Roll Dice" shortcut="CTRL+R" execute="rollTable" />
+    </table>
+    <player summary="Score:{#Score}|Bag:{#Dice Bag}" >
+        <counter name="Score" icon="Dice/score.png" default="0" reset="False" />
+        <globalvariable name="diceRegion" value="100,100,25,25" />
+        <group name="Dice Bag" icon="Dice/bag.png" visibility="none" ordered="False"
+        viewState="pile" />
+    </player>
+    <shared summary="Score:{#Score}|Bag:{#Dice Bag}" >
+        <group name="Dice Bag" icon="Dice/bag.png" visibility="none" ordered="False"
+        viewState="pile" />
+    </shared>
+    <deck>
+        <section name="Bag" group="Dice Bag" />
+    </deck>
+    <sharedDeck>
+        <section name="Bag" group="Dice Bag" />
+    </sharedDeck>
+</game>
