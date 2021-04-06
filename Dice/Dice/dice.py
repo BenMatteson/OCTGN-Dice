@@ -1,7 +1,7 @@
 import sys
 if False:
     from octgn import mute, table, notify, players, me, setGlobalVariable, getGlobalVariable, whisper, rnd # pylint: disable=import-error
-    from lib import callBackOnComplete, rand # pylint: disable=import-error
+    from lib import callBackOnComplete, rand, giveControlTo # pylint: disable=import-error
 
 def rollTable(group, x=0, y=0):
     mute()
