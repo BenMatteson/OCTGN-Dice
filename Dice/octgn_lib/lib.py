@@ -1,5 +1,7 @@
 # Version 0.0.3
 import sys
+if False:
+    from octgn import mute, table, notify, players, me, setGlobalVariable, getGlobalVariable, whisper, rnd, rndArray, remoteCall # pylint: disable=import-error
 
 RANDOM_NAME_SIZE = 20  # size of random unique names
 

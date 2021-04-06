@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <game name="Dice" authors="Soul1355" id="77645381-501e-48f9-bb9b-0b8459dd9713" 
-    octgnVersion="3.4.286.0" version="0.3.0.0" scriptVersion="3.1.0.2" 
+    octgnVersion="3.4.286.0" version="0.3.0.2" scriptVersion="3.1.0.2" 
     markersize="12" usetwosidedtable="False"
     setsurl="https://github.com/BenMatteson/OCTGN-Dice" 
     gameurl="https://github.com/BenMatteson/OCTGN-Dice"
@@ -8,7 +8,7 @@
     tags="Dice" iconurl="https://publicdomainvectors.org/photos/misc-dice.png">
     <scripts>
         <script src="Dice/dice.py" />
-        <script src="octgn-lib/lib.py"/>
+        <script src="octgn_lib/lib.py"/>
     </scripts>
     <proxygen definitionsrc="Dice/proxyDice.xml" />
     <globalvariables>
