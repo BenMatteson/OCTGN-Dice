@@ -92,7 +92,7 @@ def chainedCall(callChain):
 
 
 # region multiple callback
-callBacks = {}
+_callBacks = {}
 
 
 def callBackOnComplete(players, callList, callBack):
@@ -128,7 +128,7 @@ def callBackOnComplete(players, callList, callBack):
     name = randomName()
     setGlobalVariable(name, len(players))
 
-    callBacks[name] = callBack
+    _callBacks[name] = callBack
 
     for player in players:
         chain = buildCallChain(
@@ -144,7 +144,7 @@ def _finishedCall(name):
     if remaining > 0:
         setGlobalVariable(name, remaining)
     else:
-        func, args = callBacks.pop(name)
+        func, args = _callBacks.pop(name)
         globals()[func](*args)
 # endregion
 

@@ -13,8 +13,8 @@ def roll(cards, x=0, y=0):
     if any(card.controller != me for card in cards): 
         callBackOnComplete(
             players,                            # for simplicity, we ask everyone
-            [                                   # to give us all the cards
-                ['giveControlTo', [me, cards]]
+            [
+                ['giveControlTo', [me, cards]]  # to give us all the cards
             ],
             ['_rollActual', [cards]]            # when they're all done, roll
         )
