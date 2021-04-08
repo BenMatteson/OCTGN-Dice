@@ -49,14 +49,12 @@ def isDice(cards, x=0, y=0):
     return all(card.set == 'Dice' for card in cards)
 
 # area only used for start point, should probably be small
-
-
 def getDistributedPoints(x, y, width, height, count, minDist, k=30):
     mute()
-    if count <= 0 or width <= 0 or height <= 0:
+    if count <= 0 or width < 0 or height < 0:
         return
 
-    first = (rnd(x, width), rnd(y, height))
+    first = (rnd(x, x + width), rnd(y, y + height))
     active = [first]
     ret = {first}
     count -= 1

@@ -152,6 +152,33 @@ def _finishedCall(name):
 
 
 def rand(val1=sys.maxsize, val2=None, count=0):
+    # region docstring
+    """
+    All-in-one random number generator. 
+    If no parameters are passed, returns value between 0 and sys.maxsize - 1
+    Note: the max value is always EXCLUDED from possible returns.
+
+    Parameters
+    ----------
+    val1 : int, optional
+        If one value is provided, used to set the max value, if two, sets the min value
+    val2 : int, optional
+        Sets the max value, val1 MUST be set if this value is used.
+    count : int, optional
+        If greater than 0, will return a list of values in the defined range
+
+    Returns
+    -------
+    Union[int,list]
+        Return is an integer if count is <= 0, otherwise, returns a list of 
+        length equal to count
+
+    Raises
+    ------
+    Value Error
+        if val1 > val2 and both are defined
+    """
+    # endregion
     # note: sys.maxsize breaks rnd, but we exclude the max value later
     mute()
     if val2 is None:
@@ -160,6 +187,8 @@ def rand(val1=sys.maxsize, val2=None, count=0):
     else:
         min = val1
         max = val2 - 1  # exclude max value like usual
+    if min > max:
+        raise ValueError("min value greater than max")
     if count <= 0:
         return rnd(min, max)
     else:
