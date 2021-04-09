@@ -1,10 +1,48 @@
 # Version 0.0.3
 import sys
 if False:
-    from octgn import mute, table, notify, players, me, setGlobalVariable, getGlobalVariable, whisper, rnd, rndArray, remoteCall # pylint: disable=import-error
+    from octgn import mute, table, notify, players, me, setGlobalVariable, getGlobalVariable, getPlayers, whisper, rnd, rndArray, remoteCall # pylint: disable=import-error
 
 RANDOM_NAME_SIZE = 20  # size of random unique names
 
+def takeControlThen(cards, callBack, fast=False):
+    # region docstring
+    """
+    Take control of cards (if needed) then call the given callBack
+
+    Parameters
+    ----------
+    cards : list
+        A list of cards you want to take control of
+    callBack : list
+        A two item list of function name (str) and arguments (list)
+    fast : boolean
+        If true, executes callback immediately if cards are already controlled
+        Note: this means callBack may be completed before returning
+
+    Returns
+    -------
+    boolean
+        True if all cards are already controlled, False otherwise
+    """
+    # endregion
+    mute()
+    if any(card.controller != me for card in cards): 
+        callBackOnComplete(
+            getPlayers(),                       # for simplicity, we ask everyone
+            [
+                ['giveControlTo', [me, cards]]  # to give us all the cards
+            ],
+            callBack                            # when they're all done, callBack
+        )
+        return False
+    else: # already control all cards
+        if fast:
+            chainedCall([callBack]) # optionally skip remoteCall if execution order
+        else:
+            remoteCall(me, *callBack) # remoteCall self to maintain expected execution order
+        return True
+        
 
 def giveControlTo(player, cards):
     # region docstring
@@ -26,7 +64,6 @@ def giveControlTo(player, cards):
 
 # region remoteCall extensions
 # region chained calls
-
 
 def buildCallChain(callList):
     # region docstring
@@ -87,7 +124,10 @@ def chainedCall(callChain):
             remoteCall(*args)
             break
         else:
-            globals()[func](*args)
+            if globals().get(func, False):
+                globals()[func](*args)
+            else:
+                raise ChainedCallError('function not found')
 # endregion
 
 
@@ -135,7 +175,10 @@ def callBackOnComplete(players, callList, callBack):
             [[player] + call for call in callList] +
             [[me, '_finishedCall', [name]]]
         )
-        chainedCall(chain)
+        try:
+            chainedCall(chain)
+        except ChainedCallError:
+            ('callBackOnComplete: function not found')
 
 
 def _finishedCall(name):
@@ -145,7 +188,10 @@ def _finishedCall(name):
         setGlobalVariable(name, remaining)
     else:
         func, args = _callBacks.pop(name)
-        globals()[func](*args)
+        if globals().get(func, False):
+            globals()[func](*args)
+        else:
+            raise CallbackError('function not found')
 # endregion
 
 # endregion
@@ -201,5 +247,12 @@ def randomName():
     Generates a random string made of characters which are valid for global variable names
     """
     # endregion
+    mute()
     genName = rndArray(35, 90, RANDOM_NAME_SIZE)
     return ''.join(map(chr, genName))
+
+class ChainedCallError(Exception):
+    pass
+
+class CallbackError(Exception):
+    pass

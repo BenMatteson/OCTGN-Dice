@@ -1,7 +1,7 @@
 import sys
 if False:
-    from octgn import mute, table, notify, players, me, setGlobalVariable, getGlobalVariable, whisper, rnd # pylint: disable=import-error
-    from lib import callBackOnComplete, rand, giveControlTo # pylint: disable=import-error
+    from octgn import mute, table, notify, me, setGlobalVariable, getGlobalVariable, whisper, rnd # pylint: disable=import-error
+    from lib import callBackOnComplete, rand, giveControlTo, takeControlThen # pylint: disable=import-error
 
 def rollTable(group, x=0, y=0):
     mute()
@@ -10,16 +10,7 @@ def rollTable(group, x=0, y=0):
 def roll(cards, x=0, y=0):
     mute()
     notify("{} Rolls:".format(me))
-    if any(card.controller != me for card in cards): 
-        callBackOnComplete(
-            players,                            # for simplicity, we ask everyone
-            [
-                ['giveControlTo', [me, cards]]  # to give us all the cards
-            ],
-            ['_rollActual', [cards]]            # when they're all done, roll
-        )
-    else:
-        _rollActual(cards)
+    takeControlThen(cards, [ '_rollActual', [cards] ], True)
 
 def _rollActual(cards, name=None):
     mute()
