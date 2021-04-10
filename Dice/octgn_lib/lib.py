@@ -78,10 +78,10 @@ def buildCallChain(callList):
         each "call" is a list of player, function name as a string and
         a list of arguments. Essentially the arguments of a remoteCall, as a list
         Example:
-        [ 
-            [player, 'function', [arg1, arg2, etc.] ],
-            [player2, 'otherFunction', [] ]
-        ]
+            [ 
+                [player, 'function', [arg1, arg2, etc.] ],
+                [player2, 'otherFunction', [] ]
+            ]
     """
     # endregion
     mute()
@@ -102,8 +102,7 @@ def _internalBuildCallChain(callList, prev):
                 [current[0], 'chainedCall', [
                         [[current[1], current[2]]] +
                     _internalBuildCallChain(callList[1:], prev)
-                ]
-                ]
+                ]]
              ]
         ]
 
