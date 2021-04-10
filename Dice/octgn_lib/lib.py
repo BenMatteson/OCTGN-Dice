@@ -3,7 +3,7 @@ import sys
 if False:
     from octgn import mute, table, notify, players, me, setGlobalVariable, getGlobalVariable, getPlayers, whisper, rnd, rndArray, remoteCall # pylint: disable=import-error
 
-RANDOM_NAME_SIZE = 20  # size of random unique names
+RANDOM_NAME_SIZE = 10  # size of random unique names
 
 def takeControlThen(cards, callBack, fast=False):
     # region docstring
@@ -151,10 +151,10 @@ def callBackOnComplete(players, callList, callBack):
         a list of arguments. Essentially the arguments of a 
         remoteCall minus the player, as a list
         Example:
-        [ 
-            ['function', [arg1, arg2, etc.] ],
-            ['otherFunction', [] ]
-        ]
+            [ 
+                ['function', [arg1, arg2, etc.] ],
+                ['otherFunction', [] ]
+            ]
     callBack : list
         A list consisting of a function name as a string and arguments as a list,
         to be called after all players complete callList.
@@ -162,7 +162,7 @@ def callBackOnComplete(players, callList, callBack):
     """
     # endregion
     mute()
-    if len(players) <= 0:
+    if len(players) == 0:
         return
     # define random name for function
     name = randomName()
